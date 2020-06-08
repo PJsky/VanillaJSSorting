@@ -8,11 +8,24 @@ let sorting_steps = [];
 let current_step = 0;
 let barToChange1, barToChange2;
 
+const stepSlider = document.querySelector("#myRangeSlider");
+stepSlider.addEventListener("input", () =>{
+    visualize_step_data(stepSlider.value);
+})
+
+
 function bubble_sort(){
     let hasChangeHappened = false;
     step_counter = 0;
     sorting_steps = [];
     let numberOfComparisons = graph_data.length - 1;
+    sorting_steps.push({
+        graph_data:[...graph_data],
+        graph_data_indexes:[...graph_data_indexes],
+        loop_iteration:-1,
+        barsSorted: 0,
+        isStepChange:false,
+    });
     do {
         hasChangeHappened = false;
         for (var i=0; i < numberOfComparisons; i++){
@@ -23,7 +36,7 @@ function bubble_sort(){
                 graph_data:[...graph_data],
                 graph_data_indexes:[...graph_data_indexes],
                 loop_iteration:i,
-                barsSorted: graph_data.length-numberOfComparisons+1,
+                barsSorted: graph_data.length-numberOfComparisons-1,
                 isStepChange:false,
                 stepNumber:step_counter
             }
@@ -51,17 +64,42 @@ function bubble_sort(){
                     graph_data:[...graph_data],
                     graph_data_indexes:[...graph_data_indexes],
                     loop_iteration:i,
-                    barsSorted: graph_data.length-numberOfComparisons+1,
+                    barsSorted: graph_data.length-numberOfComparisons-1,
                     isStepChange:true,
                     stepNumber:step_counter
                 }
                 sorting_steps.push(step);
             }
         }
+        
         numberOfComparisons--;
+
+        step={
+            graph_data:[...graph_data],
+            graph_data_indexes:[...graph_data_indexes],
+            loop_iteration:-1,
+            barsSorted: graph_data.length-numberOfComparisons-1,
+            isStepChange:true,
+            stepNumber:step_counter
+        }
+        if(hasChangeHappened)
+        sorting_steps.push(step);
+
+
     }while(hasChangeHappened);
     console.log(graph_data);
-    
+
+    sorting_steps.push({
+        graph_data:[...graph_data],
+        graph_data_indexes:[...graph_data_indexes],
+        loop_iteration:-1,
+        barsSorted: graph_data.length,
+        isStepChange:false,
+    });
+
+    stepSlider.setAttribute("max", sorting_steps.length);
+
+
     return graph_data;
 }
 
@@ -94,20 +132,28 @@ function visualize_step_data(step_number=-1){
     let compareIndex = sorting_steps[step_number].loop_iteration;
     console.log(step_graph_data_indexes);
     //Put bars in proper places for a selected step of sorting
-    for(let i=0; i<bars_array.length; i++)
+    for(let i=0; i<bars_array.length; i++){
         bars_array[i].setAttribute("transform", `translate(${20+step_graph_data_indexes.indexOf(i)*60})`);
-
-    if(barToChange1){
-        barToChange1.setAttribute("fill", "blue");
-        barToChange2.setAttribute("fill", "blue");
+        bars_array[i].querySelector("rect").setAttribute("fill", "blue");
     }
+    // if(barToChange1){
+    //     barToChange1.setAttribute("fill", "blue");
+    //     barToChange2.setAttribute("fill", "blue");
+    // }
 
-        let indexOfBarToChange1 = step_graph_data_indexes[compareIndex];
-        let indexOfBarToChange2 = step_graph_data_indexes[compareIndex+1];
-        barToChange1 = bars_array[indexOfBarToChange1].querySelector("rect");
-        barToChange2 = bars_array[indexOfBarToChange2].querySelector("rect");
-        barToChange1.setAttribute("fill", "red");
-        barToChange2.setAttribute("fill", "red");
+        if(compareIndex>=0){
+            let indexOfBarToChange1 = step_graph_data_indexes[compareIndex];
+            let indexOfBarToChange2 = step_graph_data_indexes[compareIndex+1];
+            barToChange1 = bars_array[indexOfBarToChange1].querySelector("rect");
+            barToChange2 = bars_array[indexOfBarToChange2].querySelector("rect");
+            barToChange1.setAttribute("fill", "red");
+            barToChange2.setAttribute("fill", "red");
+        }
+
+    for(let i=0; i<sorting_steps[step_number].barsSorted;i++){
+        let indexOfSortedBar = step_graph_data_indexes[step_graph_data_indexes.length-1-i];
+        bars_array[indexOfSortedBar].querySelector("rect").setAttribute("fill","gold");
+    }
 
 }
 
