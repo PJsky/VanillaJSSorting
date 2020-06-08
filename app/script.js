@@ -5,10 +5,13 @@ let graph_data_indexes = [];
 let bars_array = [];
 let step_counter;
 let sorting_steps = [];
+let current_step = 0;
+let barToChange1, barToChange2;
 
 function bubble_sort(){
     let hasChangeHappened = false;
     step_counter = 0;
+    sorting_steps = [];
     let numberOfComparisons = graph_data.length - 1;
     do {
         hasChangeHappened = false;
@@ -20,8 +23,7 @@ function bubble_sort(){
                 graph_data:[...graph_data],
                 graph_data_indexes:[...graph_data_indexes],
                 loop_iteration:i,
-                numberOfComparisons:numberOfComparisons,
-                hasChangeHappened:hasChangeHappened,
+                barsSorted: graph_data.length-numberOfComparisons+1,
                 isStepChange:false,
                 stepNumber:step_counter
             }
@@ -39,7 +41,7 @@ function bubble_sort(){
                 
                 //swap values of svg group indexes
                 swap_graph_bars(i,i+1);
-                update_data_visualization();
+                //update_data_visualization();
                 
 
                 hasChangeHappened = true;
@@ -49,8 +51,7 @@ function bubble_sort(){
                     graph_data:[...graph_data],
                     graph_data_indexes:[...graph_data_indexes],
                     loop_iteration:i,
-                    numberOfComparisons:numberOfComparisons,
-                    hasChangeHappened:hasChangeHappened,
+                    barsSorted: graph_data.length-numberOfComparisons+1,
                     isStepChange:true,
                     stepNumber:step_counter
                 }
@@ -76,18 +77,48 @@ function update_data_visualization(){
     bars_array = document.querySelectorAll("g");
     for(let i=0; i<bars_array.length; i++)
     bars_array[i].setAttribute("transform", `translate(${20+graph_data_indexes.indexOf(i)*60})`);
+}
 
+function visualize_step_data(step_number=-1){
 
+    if(step_number==-1){
+        let inputTextElement = document.querySelector("input#stepNumberInput");
+        step_number = parseInt(inputTextElement.value);
+        current_step = step_number;
+    }
+
+    bars_array = document.querySelectorAll("g");
+    let step_graph_data = sorting_steps[step_number].graph_data;
+    let step_graph_data_indexes = sorting_steps[step_number].graph_data_indexes;
+    let step_graph_change_state = sorting_steps[step_number].isStepChange;
+    let compareIndex = sorting_steps[step_number].loop_iteration;
+    console.log(step_graph_data_indexes);
+    //Put bars in proper places for a selected step of sorting
+    for(let i=0; i<bars_array.length; i++)
+        bars_array[i].setAttribute("transform", `translate(${20+step_graph_data_indexes.indexOf(i)*60})`);
+
+    if(barToChange1){
+        barToChange1.setAttribute("fill", "blue");
+        barToChange2.setAttribute("fill", "blue");
+    }
+
+        let indexOfBarToChange1 = step_graph_data_indexes[compareIndex];
+        let indexOfBarToChange2 = step_graph_data_indexes[compareIndex+1];
+        barToChange1 = bars_array[indexOfBarToChange1].querySelector("rect");
+        barToChange2 = bars_array[indexOfBarToChange2].querySelector("rect");
+        barToChange1.setAttribute("fill", "red");
+        barToChange2.setAttribute("fill", "red");
 
 }
 
-function swap1and2(){
-    let g = document.querySelectorAll("g");
-    tempGTransform = g[0].getAttribute("transform");
-    g[0].setAttribute("transform", g[1].getAttribute("transform"));
-    g[1].setAttribute("transform", tempGTransform);
+function next_step(){
+    current_step++
+    visualize_step_data(current_step);
+}
 
-
+function color_compared_bars(index){
+    bars_array = document.querySelector("g");
+    first_bar_to_color = bars_array
 }
 
 
