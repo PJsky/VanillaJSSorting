@@ -1,5 +1,4 @@
 var svg = document.getElementById('svgCanvas');
-const stepSlider = document.querySelector("#myRangeSlider");
 var newElement = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 let graph_data;
 let graph_data_indexes = [];
@@ -7,15 +6,11 @@ let bars_array = [];
 let step_counter;
 let sorting_steps = [];
 let current_step = 0;
-let playInterval;
-stepSlider.value = current_step;
 let barToChange1, barToChange2;
-let state_running;
 
-
+const stepSlider = document.querySelector("#myRangeSlider");
 stepSlider.addEventListener("input", () =>{
     visualize_step_data(stepSlider.value);
-    current_step=stepSlider.value;
 })
 
 
@@ -102,22 +97,10 @@ function bubble_sort(){
         isStepChange:false,
     });
 
-    stepSlider.setAttribute("max", sorting_steps.length-1);
+    stepSlider.setAttribute("max", sorting_steps.length);
 
 
     return graph_data;
-}
-
-function play(){
-    if(state_running==false){
-        playInterval =  setInterval(next_step,500);
-        state_running=true;    
-    }
-}
-    
-function stop(){
-    clearInterval(playInterval);
-    state_running = false
 }
 
 //Takes array of all bars with their texts and swaps their transform attributes
@@ -140,7 +123,6 @@ function visualize_step_data(step_number=-1){
         let inputTextElement = document.querySelector("input#stepNumberInput");
         step_number = parseInt(inputTextElement.value);
         current_step = step_number;
-        stepSlider.value = current_step;
     }
 
     bars_array = document.querySelectorAll("g");
@@ -177,7 +159,6 @@ function visualize_step_data(step_number=-1){
 
 function next_step(){
     current_step++
-    stepSlider.value = current_step;
     visualize_step_data(current_step);
 }
 
