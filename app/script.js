@@ -1,48 +1,96 @@
 var svg = document.getElementById('svgCanvas');
 var newElement = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 let graph_data;
+let graph_data_indexes = [];
+let bars_array = [];
+let step_counter;
+let sorting_steps = [];
 
 function bubble_sort(){
-    let arrayOfNumbers = graph_data;
     let hasChangeHappened = false;
-    let numberOfComparisons = arrayOfNumbers.length - 1;
+    step_counter = 0;
+    let numberOfComparisons = graph_data.length - 1;
     do {
         hasChangeHappened = false;
         for (var i=0; i < numberOfComparisons; i++){
+            
+           // let step_graph_data = [graph_data];
+            step_counter++; // compare step
+            let step={
+                graph_data:[...graph_data],
+                graph_data_indexes:[...graph_data_indexes],
+                loop_iteration:i,
+                numberOfComparisons:numberOfComparisons,
+                hasChangeHappened:hasChangeHappened,
+                isStepChange:false,
+                stepNumber:step_counter
+            }
+            sorting_steps.push(step);
+            
             //Comparing of adjecant numbers
-            if(arrayOfNumbers[i] > arrayOfNumbers[i+1]){
-                //swap values of number array
-                let tempValue = arrayOfNumbers[i];
-                arrayOfNumbers[i] = arrayOfNumbers[i+1];
-                arrayOfNumbers[i+1] = tempValue;
+            if(graph_data[i] > graph_data[i+1]){
                 
-                //swap values of svg group array
-                console.log("swap")
+
+
+                //swap values of number array
+                let tempValue = graph_data[i];
+                graph_data[i] = graph_data[i+1];
+                graph_data[i+1] = tempValue;
+                
+                //swap values of svg group indexes
                 swap_graph_bars(i,i+1);
+                update_data_visualization();
+                
 
                 hasChangeHappened = true;
+
+                step_counter++; // swap step
+                step={
+                    graph_data:[...graph_data],
+                    graph_data_indexes:[...graph_data_indexes],
+                    loop_iteration:i,
+                    numberOfComparisons:numberOfComparisons,
+                    hasChangeHappened:hasChangeHappened,
+                    isStepChange:true,
+                    stepNumber:step_counter
+                }
+                sorting_steps.push(step);
             }
         }
         numberOfComparisons--;
     }while(hasChangeHappened);
-    console.log(arrayOfNumbers);
+    console.log(graph_data);
     
-    return arrayOfNumbers;
+    return graph_data;
 }
 
 //Takes array of all bars with their texts and swaps their transform attributes
 function swap_graph_bars(bar_index1, bar_index2){
-    let bars_array = document.querySelectorAll("g");
-    //change transformations
-    let temp_bar_trans = bars_array[bar_index1].getAttribute("transform");
-    bars_array[bar_index1].setAttribute("transform", bars_array[bar_index2].getAttribute("transform"));
-    bars_array[bar_index2].setAttribute("transform", temp_bar_trans);
     //change indexes
-    bars_array[bar_index1].parentNode.insertBefore(bars_array[bar_index1], bars_array[bar_index2]);
+    let temp_graph_data_index = graph_data_indexes[bar_index1];
+    graph_data_indexes[bar_index1] = graph_data_indexes[bar_index2];
+    graph_data_indexes[bar_index2] = temp_graph_data_index;
+}
+
+function update_data_visualization(){
     bars_array = document.querySelectorAll("g");
-    bars_array[bar_index2].parentNode.insertBefore(bars_array[bar_index2], bars_array[bar_index1]);
+    for(let i=0; i<bars_array.length; i++)
+    bars_array[i].setAttribute("transform", `translate(${20+graph_data_indexes.indexOf(i)*60})`);
+
+
 
 }
+
+function swap1and2(){
+    let g = document.querySelectorAll("g");
+    tempGTransform = g[0].getAttribute("transform");
+    g[0].setAttribute("transform", g[1].getAttribute("transform"));
+    g[1].setAttribute("transform", tempGTransform);
+
+
+}
+
+
 
 //Takes array of numbers from text input and returns it
 function read_data(){
@@ -74,8 +122,11 @@ function create_graph(){
         return 0;
         
     let graphCanvas = document.querySelector("svg")
+    graph_data_indexes = [];
 
     for(i=0;i<graph_data.length;i++){
+        //Create table of vector graphic group indexes
+        graph_data_indexes.push(i);
         //Create bars based on data aquired
         let new_svg_group = document.createElementNS("http://www.w3.org/2000/svg", "g");
         graphCanvas.appendChild(new_svg_group);
@@ -85,9 +136,7 @@ function create_graph(){
         new_svg_group.appendChild(new_text);
 
         //Set bar attributes
-        //offset = 20+(60*i); 
-        //bar_translate_text = "translate(" + offset + ", 0)";
-        //new_bar.setAttribute("transform", bar_translate_text);
+
         new_bar.setAttribute("y", 250-graph_data[i]);
         new_bar.setAttribute("width", 50);
         new_bar.setAttribute("height", graph_data[i]);
@@ -96,7 +145,6 @@ function create_graph(){
         //Set text
         new_text.textContent = graph_data[i];
         //Center text beneath the bar
-        //offset = ((50-new_text.textLength.baseVal.value)/2) + 20+(60*i) ;
         offset = ((50-new_text.textLength.baseVal.value)/2);
         text_with_offset = "translate(" + offset + ", 0)";
         new_text.setAttribute("transform",text_with_offset);
@@ -109,6 +157,7 @@ function create_graph(){
     }
     
     let list_of_graphs = graphCanvas.querySelectorAll("g")
+    bars_array = document.querySelectorAll("g");
     console.log(list_of_graphs);
 
 }
