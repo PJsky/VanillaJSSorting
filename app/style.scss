@@ -1,0 +1,14 @@
+$new-color: #989898;
+
+body{
+    background-color: $new-color;
+}
+
+header{
+    color: white;
+    font-size: 3rem;
+}
+
+g{
+ transition: transform 1s ease-in-out;   
+}
