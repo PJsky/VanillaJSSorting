@@ -1,5 +1,5 @@
 var svg = document.getElementById('svgCanvas');
-const stepSlider = document.querySelector("#myRangeSlider");
+const stepSlider = document.querySelector(".progress-slider");
 var newElement = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 let graph_data;
 let graph_data_indexes = [];
@@ -262,5 +262,7 @@ function create_graph(){
     bars_array = document.querySelectorAll("g");
     console.log(list_of_graphs);
 
+    //bubble sort after creating graph
+    bubble_sort();
 }
 

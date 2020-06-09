@@ -50,6 +50,14 @@ g {
   background: darkseagreen;
 }
 
+.site-container .main-content .previous-step-button {
+  background-color: gold;
+}
+
+.site-container .main-content .next-step-button {
+  background-color: indianred;
+}
+
 .site-container .main-content .progress-slider {
   background-color: crimson;
 }

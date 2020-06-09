@@ -7,22 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        header
-    </header>
-    <input type="text" id="initializationData"/>
-    <button id="initialize_data_button" onclick="create_graph()">Initialize Data</button>
-    <button id="sort_data" onclick="bubble_sort()">Sort Data</button>
-    </br>
-    <button onclick="prev_step()">Prev step</button>
-    <button onclick="next_step()">Next step</button>
-    <div class="slidecontainer">
-        <input type="range" min="0" max="100" value="50" class="slider" id="myRangeSlider">
-    </div>
-    </br>
-    <button onclick="play()">Play</button>
-    <button onclick="stop()">Stop</button>
-
     <div class="site-container">
         <nav class=navigation-bar>
             <header class="logo"></header>
@@ -43,10 +27,12 @@
             <div class="short-instruction-screen">short-instruction-screen</div>
             <div class="long-instruction-screen">long-instruction-screen</div>
 
-            <button class="play-button">play-button</button>
-            <button class="stop-button">stop-button</button>
+            <button class="play-button" onclick="play()">play-button</button>
+            <button class="stop-button" onclick="stop()">stop-button</button>
             <input type="text" class="graph-data"/>
-            <button class="input-button">input-button</button>
+            <button class="input-button" onclick="create_graph()">input-button</button>
+            <button class="previous-step-button" onclick="prev_step()">Prev step</button>
+            <button class="next-step-button" onclick="next_step()">Next step</button>        
             <input type="range" min="0" max="100" value="0" class="progress-slider"/>
             <input type="range" min="0" max="100" value="0" class="speed-slider"/>
             <button class="about-button">about-button</button>
