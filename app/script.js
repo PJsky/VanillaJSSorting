@@ -1,4 +1,4 @@
-var svg = document.getElementById('svgCanvas');
+var svg = document.getElementById('graph-canvas');
 const stepSlider = document.querySelector(".progress-slider");
 var newElement = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 let graph_data;
@@ -11,6 +11,7 @@ let playInterval;
 stepSlider.value = current_step;
 let barToChange1, barToChange2;
 let state_running;
+let highlighted_instrution;
 
 
 stepSlider.addEventListener("input", () =>{
@@ -172,6 +173,36 @@ function visualize_step_data(step_number=-1){
         let indexOfSortedBar = step_graph_data_indexes[step_graph_data_indexes.length-1-i];
         bars_array[indexOfSortedBar].querySelector("rect").setAttribute("fill","gold");
     }
+
+    short_instrution = document.querySelector(".short-instruction");
+    highlighted_instruction = document.querySelector(".highlight");
+    if(highlighted_instrution)
+    highlighted_instrution.classList.remove("highlight");
+
+    if(sorting_steps[step_number].loop_iteration == -1){
+        if(sorting_steps[step_number].barsSorted == sorting_steps[step_number].graph_data.length)
+            {
+                highlighted_instrution = document.querySelector(".end-instruction");
+                short_instrution.textContent = "End"
+            }
+        else{
+            highlighted_instrution = document.querySelector(".begin-instruction");
+            short_instrution.textContent = "Begin iteration"
+        }
+    }else{
+        if(sorting_steps[step_number].isStepChange){
+            highlighted_instrution = document.querySelector(".switch-instruction");
+            short_instrution.textContent = "Switch"
+            }
+        else{
+            highlighted_instrution = document.querySelector(".compare-instruction");
+            short_instrution.textContent = "Compare 2 elements"
+            }
+    }
+    
+    highlighted_instrution.classList.add("highlight");
+
+
 
 }
 

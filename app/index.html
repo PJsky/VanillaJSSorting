@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tutorial Page</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,23 +20,42 @@
             <div class="graph-screen">
                 <svg version="1.1"
                 baseProfile="full"
-                width="1500" height="500"
                 xmlns="http://www.w3.org/2000/svg"
-                id="svgCanvas">
+                id="graph-canvas">
                </svg>
             </div>
-            <div class="short-instruction-screen">short-instruction-screen</div>
-            <div class="long-instruction-screen">long-instruction-screen</div>
+            <div class="short-instruction-screen">
+                <p class="short-instruction"></p>
+            </div>
+            <div class="long-instruction-screen">
+                <p class="long-instruction">do</p>
+                <p class="long-instruction begin-instruction">swapped = false <br>
+                    for i = 1 to indexOfLastUnsortedElement-1
+                </p>
+                <p class="long-instruction compare-instruction">
+                    if leftElement > rightElement
+                </p>
+                <p class="long-instruction switch-instruction">
+                    swap(leftElement, rightElement) <br>
+                    swapped = true
+                </p>
+                <p class="long-instruction end-instruction">
+                    while swapped
+                </p>
+            </div>
+            <div class="operation-panel">
+                <button class="play-button" onclick="play()">play-button</button>
+                <button class="stop-button" onclick="stop()">stop-button</button>
+                <input type="text" class="graph-data"/>
+                <button class="input-button" onclick="create_graph()">input-button</button>
+                <button class="previous-step-button" onclick="prev_step()">Prev step</button>
+                <button class="next-step-button" onclick="next_step()">Next step</button>        
+                <input type="range" min="0" max="100" value="0" class="progress-slider"/>
+                <input type="range" min="0" max="100" value="0" class="speed-slider"/>
+                <button class="about-button">about-button</button>
+            </div>
 
-            <button class="play-button" onclick="play()">play-button</button>
-            <button class="stop-button" onclick="stop()">stop-button</button>
-            <input type="text" class="graph-data"/>
-            <button class="input-button" onclick="create_graph()">input-button</button>
-            <button class="previous-step-button" onclick="prev_step()">Prev step</button>
-            <button class="next-step-button" onclick="next_step()">Next step</button>        
-            <input type="range" min="0" max="100" value="0" class="progress-slider"/>
-            <input type="range" min="0" max="100" value="0" class="speed-slider"/>
-            <button class="about-button">about-button</button>
+            
         </main>
     </div>
 

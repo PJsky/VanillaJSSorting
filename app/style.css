@@ -4,7 +4,6 @@ body {
 
 header {
   color: black;
-  font-size: 3rem;
 }
 
 g {
@@ -14,59 +13,131 @@ g {
   transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
 }
 
+.site-container .navigation-bar {
+  height: 8vh;
+  background-color: pink;
+  margin-bottom: 2vh;
+}
+
 .site-container .navigation-bar .logo {
-  background-color: gray;
+  background-color: whitesmoke;
 }
 
 .site-container .navigation-bar .sort-list {
+  margin: 0;
   background-color: gray;
+}
+
+.site-container .main-content {
+  height: 90vh;
+  width: 94%;
+  margin: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-areas: "graph-screen graph-screen short-instruction-screen" "graph-screen graph-screen long-instruction-screen" "graph-screen graph-screen long-instruction-screen" "operation-panel operation-panel operation-panel" "operation-panel operation-panel operation-panel";
+  grid-column: auto;
+  grid-gap: 1vh;
 }
 
 .site-container .main-content .graph-screen {
   background-color: green;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: graph-screen;
+}
+
+.site-container .main-content .graph-screen #graph-canvas {
+  width: 100%;
+  height: 100%;
 }
 
 .site-container .main-content .short-instruction-screen {
   background-color: azure;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: short-instruction-screen;
+}
+
+.site-container .main-content .short-instruction-screen .short-instruction {
+  height: 100%;
+  color: black;
+  background-color: cornflowerblue;
+  margin: 0px;
 }
 
 .site-container .main-content .long-instruction-screen {
-  background-color: bisque;
+  background-color: #50b6bb;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  grid-area: long-instruction-screen;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
-.site-container .main-content .play-button {
+.site-container .main-content .long-instruction-screen .long-instruction {
+  background-color: #50b6bb;
+  margin: auto;
+}
+
+.site-container .main-content .long-instruction-screen .highlight {
+  background-color: #0ce5e1;
+}
+
+.site-container .main-content .operation-panel {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: operation-panel;
+}
+
+.site-container .main-content .operation-panel .play-button {
   background-color: coral;
 }
 
-.site-container .main-content .stop-button {
+.site-container .main-content .operation-panel .stop-button {
   background-color: cornflowerblue;
 }
 
-.site-container .main-content .graph-data {
+.site-container .main-content .operation-panel .graph-data {
   background-color: darkmagenta;
 }
 
-.site-container .main-content .input-button {
+.site-container .main-content .operation-panel .input-button {
   background: darkseagreen;
 }
 
-.site-container .main-content .previous-step-button {
+.site-container .main-content .operation-panel .previous-step-button {
   background-color: gold;
 }
 
-.site-container .main-content .next-step-button {
+.site-container .main-content .operation-panel .next-step-button {
   background-color: indianred;
 }
 
-.site-container .main-content .progress-slider {
+.site-container .main-content .operation-panel .progress-slider {
   background-color: crimson;
 }
 
-.site-container .main-content .speed-slider {
+.site-container .main-content .operation-panel .speed-slider {
   background-color: darkgoldenrod;
 }
 
-.site-container .main-content .about-button {
+.site-container .main-content .operation-panel .about-button {
   background-color: red;
 }
 /*# sourceMappingURL=style.css.map */

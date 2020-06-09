@@ -1,5 +1,7 @@
 $background-color: white;
 $text-color: black;
+$highlight-long-instuction-color: #0ce5e1;
+$long-instuction-color: #50b6bb;
 
 body{
     background-color: $background-color;
@@ -7,7 +9,6 @@ body{
 
 header{
     color: $text-color;
-    font-size: 3rem;
 }
 
 g{
@@ -18,11 +19,16 @@ g{
 
     .navigation-bar{
 
+        height: 8vh;
+        background-color: pink;
+        margin-bottom: 2vh;
+
         .logo{
-            background-color: gray;
+            background-color: whitesmoke;
         }
 
         .sort-list{
+            margin: 0;
             background-color: gray;
         }
 
@@ -30,52 +36,102 @@ g{
 
     .main-content{
 
+        height: 90vh;
+        width: 94%;
+        margin: auto;
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas: "graph-screen graph-screen short-instruction-screen"
+                             "graph-screen graph-screen long-instruction-screen"
+                             "graph-screen graph-screen long-instruction-screen"
+                             "operation-panel operation-panel operation-panel"
+                             "operation-panel operation-panel operation-panel";
+        grid-column: auto;
+        grid-gap: 1vh;
+
         .graph-screen{
             background-color: green;
+            grid-area: graph-screen;
+
+            #graph-canvas{
+                width: 100%;
+                height: 100%;
+            }
+
         }
 
         .short-instruction-screen{
             background-color: azure;
+            grid-area: short-instruction-screen;
+
+            .short-instruction{
+                height: 100%;
+                color: black;
+                background-color: cornflowerblue;
+                margin: 0px;
+            }
         }
 
         .long-instruction-screen{
-            background-color: bisque;
+            background-color: $long-instuction-color;
+            grid-area: long-instruction-screen;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .long-instruction{
+                background-color: $long-instuction-color;
+                margin: auto;
+            }
+
+            .highlight{
+                background-color: $highlight-long-instuction-color;
+            }
+
         }
 
-        .play-button{
-            background-color: coral;
-        }
-        
-        .stop-button{
-            background-color: cornflowerblue;
-        }
-        
-        .graph-data{
-            background-color: darkmagenta;
-        }
+        .operation-panel{
 
-        .input-button{
-            background: darkseagreen;
-        }
-        
-        .previous-step-button{
-            background-color: gold;
-        }
+            grid-area: operation-panel;
 
-        .next-step-button{
-            background-color: indianred;
-        }
+            
+            .play-button{
+                background-color: coral;
+            }
+            
+            .stop-button{
+                background-color: cornflowerblue;
+            }
+            
+            .graph-data{
+                background-color: darkmagenta;
+            }
 
-        .progress-slider{
-            background-color: crimson;
-        }
+            .input-button{
+                background: darkseagreen;
+            }
+            
+            .previous-step-button{
+                background-color: gold;
+            }
 
-        .speed-slider{
-            background-color: darkgoldenrod;
-        }
+            .next-step-button{
+                background-color: indianred;
+            }
 
-        .about-button{
-            background-color: red;
+            .progress-slider{
+                background-color: crimson;
+            }
+
+            .speed-slider{
+                background-color: darkgoldenrod;
+            }
+
+            .about-button{
+                background-color: red;
+            }
+
         }
 
     }
