@@ -1,14 +1,75 @@
-$new-color: #989898;
+$background-color: white;
+$text-color: black;
 
 body{
-    background-color: $new-color;
+    background-color: $background-color;
 }
 
 header{
-    color: white;
+    color: $text-color;
     font-size: 3rem;
 }
 
 g{
  transition: transform 1s ease-in-out;   
+}
+
+.site-container{
+
+    .navigation-bar{
+
+        .logo{
+            background-color: gray;
+        }
+
+        .sort-list{
+            background-color: gray;
+        }
+
+    }
+
+    .main-content{
+
+        .graph-screen{
+            background-color: green;
+        }
+
+        .short-instruction-screen{
+            background-color: azure;
+        }
+
+        .long-instruction-screen{
+            background-color: bisque;
+        }
+
+        .play-button{
+            background-color: coral;
+        }
+        
+        .stop-button{
+            background-color: cornflowerblue;
+        }
+        
+        .graph-data{
+            background-color: darkmagenta;
+        }
+
+        .input-button{
+            background: darkseagreen;
+        }
+
+        .progress-slider{
+            background-color: crimson;
+        }
+
+        .speed-slider{
+            background-color: darkgoldenrod;
+        }
+
+        .about-button{
+            background-color: red;
+        }
+
+    }
+
 }

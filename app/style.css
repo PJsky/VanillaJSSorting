@@ -1,9 +1,9 @@
 body {
-  background-color: #989898;
+  background-color: white;
 }
 
 header {
-  color: white;
+  color: black;
   font-size: 3rem;
 }
 
@@ -12,5 +12,53 @@ g {
   transition: -webkit-transform 1s ease-in-out;
   transition: transform 1s ease-in-out;
   transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+}
+
+.site-container .navigation-bar .logo {
+  background-color: gray;
+}
+
+.site-container .navigation-bar .sort-list {
+  background-color: gray;
+}
+
+.site-container .main-content .graph-screen {
+  background-color: green;
+}
+
+.site-container .main-content .short-instruction-screen {
+  background-color: azure;
+}
+
+.site-container .main-content .long-instruction-screen {
+  background-color: bisque;
+}
+
+.site-container .main-content .play-button {
+  background-color: coral;
+}
+
+.site-container .main-content .stop-button {
+  background-color: cornflowerblue;
+}
+
+.site-container .main-content .graph-data {
+  background-color: darkmagenta;
+}
+
+.site-container .main-content .input-button {
+  background: darkseagreen;
+}
+
+.site-container .main-content .progress-slider {
+  background-color: crimson;
+}
+
+.site-container .main-content .speed-slider {
+  background-color: darkgoldenrod;
+}
+
+.site-container .main-content .about-button {
+  background-color: red;
 }
 /*# sourceMappingURL=style.css.map */

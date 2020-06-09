@@ -10,24 +10,11 @@
     <header>
         header
     </header>
-    <svg version="1.1"
-     baseProfile="full"
-     width="100%" height="500"
-     xmlns="http://www.w3.org/2000/svg"
-     id="svgCanvas">
-
-     <!--<g>
-        <rect x="20" y="150" width="50" height="100" fill="blue"/> 
-        <text x="26" y="270"> AAA</text>
-     </g>-->
-
-    </svg>
     <input type="text" id="initializationData"/>
     <button id="initialize_data_button" onclick="create_graph()">Initialize Data</button>
     <button id="sort_data" onclick="bubble_sort()">Sort Data</button>
     </br>
-    <input type="text" id="stepNumberInput"/>
-    <button onclick="visualize_step_data()">Jump to step</button>
+    <button onclick="prev_step()">Prev step</button>
     <button onclick="next_step()">Next step</button>
     <div class="slidecontainer">
         <input type="range" min="0" max="100" value="50" class="slider" id="myRangeSlider">
@@ -36,8 +23,35 @@
     <button onclick="play()">Play</button>
     <button onclick="stop()">Stop</button>
 
+    <div class="site-container">
+        <nav class=navigation-bar>
+            <header class="logo"></header>
+            <ul class="sort-list">
+                <li>Quick</li>
+                <li>Bubble</li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div class="graph-screen">
+                <svg version="1.1"
+                baseProfile="full"
+                width="1500" height="500"
+                xmlns="http://www.w3.org/2000/svg"
+                id="svgCanvas">
+               </svg>
+            </div>
+            <div class="short-instruction-screen">short-instruction-screen</div>
+            <div class="long-instruction-screen">long-instruction-screen</div>
 
-
+            <button class="play-button">play-button</button>
+            <button class="stop-button">stop-button</button>
+            <input type="text" class="graph-data"/>
+            <button class="input-button">input-button</button>
+            <input type="range" min="0" max="100" value="0" class="progress-slider"/>
+            <input type="range" min="0" max="100" value="0" class="speed-slider"/>
+            <button class="about-button">about-button</button>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>

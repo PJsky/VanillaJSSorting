@@ -181,6 +181,12 @@ function next_step(){
     visualize_step_data(current_step);
 }
 
+function prev_step(){
+    current_step--
+    stepSlider.value = current_step;
+    visualize_step_data(current_step);
+}
+
 function color_compared_bars(index){
     bars_array = document.querySelector("g");
     first_bar_to_color = bars_array
@@ -190,7 +196,7 @@ function color_compared_bars(index){
 
 //Takes array of numbers from text input and returns it
 function read_data(){
-    let inputTextElement = document.querySelector("input#initializationData")
+    let inputTextElement = document.querySelector("input.graph-data")
     let data_as_string = inputTextElement.value;
     let data_string_array = data_as_string.replace(/ /g, '').split(',');
     let data_int_array = data_string_array.map(Number);
