@@ -1,12 +1,16 @@
-body{
-    background-color: #999999;
+body {
+  background-color: #989898;
 }
 
-header{
-    color: white;
-    font-size: 3rem;
+header {
+  color: white;
+  font-size: 3rem;
 }
 
-g{
- transition: transform 1s ease-in-out;   
+g {
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
 }
+/*# sourceMappingURL=style.css.map */
